@@ -1,0 +1,52 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+  <style>
+    #customers {
+      font-family: Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    #customers td, #customers th {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+
+    #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+    #customers tr:hover {background-color: #ddd;}
+
+    #customers th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #04AA6D;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+<h1>북마크 삭제 </h1>
+<p>북마크를 삭제하시겠습니까?</p>
+
+<table id="customers">
+  <tr>
+    <th>북마크 이름</th>
+    <td th:text="${bookmark.grname}"></td>
+  </tr>
+  <tr>
+    <th>와이파이명</th>
+    <td th:text="${bookmark.name}"></td>
+  </tr>
+  <tr>
+    <th>등록일자</th>
+    <td th:text="${bookmark.registrationTime}"></td>
+  </tr>
+</table>
+<a href="/bookmark-list"><button id="return-bookmark-list" style="background: transparent;border: none;">돌아가기</button></a>
+<form th:action="@{/delete-bookmark-confirmed/{id}(id=${bookmark.id})}" method="post">
+  <button type="submit">삭제</button>
+</form>
+</body>
+</html>
+

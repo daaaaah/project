@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #customers {
+      font-family: Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    #customers td, #customers th {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+
+    #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+    #customers tr:hover {background-color: #ddd;}
+
+    #customers th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #04AA6D;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Nearby Wifi Locations</h2>
+<form id="locationForm" action="/near" method="post">
+</form>
+<table id="customers" border="1">
+  <thead>
+  <tr>
+    <!-- 헤더 추가 -->
+    <th>거리(km)</th>
+    <th>관리번호</th>
+    <th>자치구</th>
+    <th>와이파이명</th>
+    <th>도로명주소</th>
+    <th>상세주소</th>
+    <th>설치위치(층)</th>
+    <th>설치유형</th>
+    <th>설치기관</th>
+    <th>서비스구분</th>
+    <th>망종류</th>
+    <th>설치년도</th>
+    <th>실내외구분</th>
+    <th>WIFI접속환경</th>
+    <th>X좌표</th>
+    <th>Y좌표</th>
+    <th>작업일자</th>
+  </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+<script>
+  fetch('/wifi')
+          .then(response => response.json())
+          .then(data => {
+            const tbody = document.getElementById('customers').getElementsByTagName('tbody')[0];
+            data.forEach(info => {
+              const row = tbody.insertRow();
+              row.insertCell(0).innerHTML = info.distance;
+              row.insertCell(1).innerHTML = info.lat;
+              row.insertCell(2).innerHTML = info.lng;
+              row.insertCell(3).innerHTML = info.main_name;
+              row.insertCell(4).innerHTML = info.address1;
+              row.insertCell(5).innerHTML = info.address2;
+              row.insertCell(6).innerHTML = info.install_floor;
+              row.insertCell(7).innerHTML = info.install_type;
+              row.insertCell(8).innerHTML = info.install_by;
+              row.insertCell(9).innerHTML = info.service_type;
+              row.insertCell(10).innerHTML = info.network_type;
+              row.insertCell(11).innerHTML = info.construction_year;
+              row.insertCell(12).innerHTML = info.in_out_door;
+              row.insertCell(13).innerHTML = info.remarks;
+              row.insertCell(14).innerHTML = info.lat;
+              row.insertCell(15).innerHTML = info.lng;
+              row.insertCell(16).innerHTML = info.work_datetime;
+            });
+          });
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+  <style>
+    #customers {
+      font-family: Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    #customers td, #customers th {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+
+    #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+    #customers tr:hover {background-color: #ddd;}
+
+    #customers th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #04AA6D;
+      color: white;
+    }
+  </style>
+</head>
+<h1>위치 히스토리 목록</h1>
+
+<a href="/wifi"><button id="home" style="background: transparent;border: none;">홈</button></a>|
+<a href="/location-history"><button id="history" style="background: transparent;border: none;">위치 히스토리 목록</button></a>|
+<a href="/fetch-and-save-wifi-info"><button id="api_info" style="background: transparent;border: none;">Open API 정보 가져오기</button></a>|
+<a href="/bookmark-list"><button id="bookmark-list" style="background: transparent;border: none;">북마크 보기</button></a>|
+<a href="/bookmark-group-list"><button id="loadGroups" style="background: transparent;border: none;">북마크 그룹 관리</button></a>
+<body>
+<table id="customers">
+  <tr>
+    <th>ID</th>
+    <th>X좌표</th>
+    <th>Y좌표</th>
+    <th>조회일자</th>
+    <th>비고</th>
+    <!-- 기타 필드 -->
+  </tr>
+  <tr th:each="location : ${locationHistory}">
+    <td th:text="${location.id}"></td>
+    <td th:text="${location.lng}"></td>
+    <td th:text="${location.lat}"></td>
+    <td th:text="${location.registrationDate}"></td>
+    <td>
+      <form action="/delete-location" method="post">
+        <input type="hidden" name="locationId" th:value="${location.id}">
+        <button type="submit" onclick="return confirm('해당 위치를 삭제하시겠습니까?')">삭제</button>
+      </form>
+    </td>
+    </form></td>
+  </tr>
+</table>
+<script>
+</script>
+
+</body>
+</html>

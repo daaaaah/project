@@ -1,0 +1,53 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <style>
+        #customers {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 50%;
+        }
+
+        #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+        #customers tr:hover {background-color: #ddd;}
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+    </style>
+</head>
+<a href="/wifi"><button id="home" style="background: transparent;border: none;">홈</button></a>|
+<a href="/location-history"><button id="history" style="background: transparent;border: none;">위치 히스토리 목록</button></a>|
+<a href="/fetch-and-save-wifi-info"><button id="api_info" style="background: transparent;border: none;">Open API 정보 가져오기</button></a>|
+<a href="/bookmark-list"><button id="bookmark-list" style="background: transparent;border: none;">북마크 보기</button></a>|
+<a href="/bookmark-group-list"><button id="loadGroups" style="background: transparent;border: none;">북마크 그룹 관리</button></a>
+
+<h1>북마크 그룹 수정</h1>
+<body>
+<form action="/update-bookmark-group" method="post">
+<table id="customers">
+    <thead>
+        <tr>
+        <th>북마크 이름</th>
+        <td><input type="text" name="name" th:value="${group.name}"></td>
+        </tr>
+        <tr>
+        <th>순서</th>
+        <td><input type="number" name="number" th:value="${group.number}"></td>
+        </tr>
+    </thead>
+</table>
+<button type="submit">수정</button>
+</form>
+<a href="/bookmark-group-list"><button id="return" style="background: transparent;border: none;">돌아가기</button></a>
+</body>
+</html>

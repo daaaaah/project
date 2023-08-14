@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <style>
+        #customers {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+        #customers tr:hover {background-color: #ddd;}
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<h1>와이파이 정보 구하기</h1>
+<a href="/wifi"><button id="home" style="background: transparent;border: none;">홈</button></a>|
+<a href="/location-history"><button id="history" style="background: transparent;border: none;">위치 히스토리 목록</button></a>|
+<a href="/fetch-and-save-wifi-info"><button id="api_info" style="background: transparent;border: none;">Open API 정보 가져오기</button></a>|
+<a href="/bookmark-list"><button id="bookmark-list" style="background: transparent;border: none;">북마크 보기</button></a>|
+<a href="/bookmark-group-list"><button id="loadGroups" style="background: transparent;border: none;">북마크 그룹 관리</button></a>
+
+<form action="/add-bookmark" th:action="@{/add-bookmark/{wifiInfoId}(wifiInfoId=${wifiId})}" method="post">
+    <select name="bookmarkGroupId">
+        <option value="none" disabled>북마크 그룹 선택</option>
+        <option th:each="group : ${groups}" th:value="${group.name}" th:text="${group.name}"></option>
+    </select>
+    <input type="hidden" name="wifiInfoId" th:value="${wifiInfoId}">
+    <button type="submit">북마크 추가하기</button>
+</form>
+
+
+
+<table id="customers">
+    <tr>
+        <th>거리(km)</th>
+        <td th:text="${wifi.Distance}"></td>
+    </tr>
+    <tr>
+        <th>관리번호</th>
+        <td th:text="${wifi.Manager_no}"></td>
+    </tr>
+    <tr>
+        <th>자치구</th>
+        <td th:text="${wifi.Ward_office}"></td>
+    </tr>
+    <tr>
+        <th>와이파이명</th>
+        <td th:text="${wifi.Main_name}"></td>
+    </tr>
+    <tr>
+        <th>도로명주소</th>
+        <td th:text="${wifi.Address1}"></td>
+    </tr>
+    <tr>
+        <th>상세주소</th>
+        <td th:text="${wifi.Address2}"></td>
+    </tr>
+    <tr>
+        <th>설치위치(층)</th>
+        <td th:text="${wifi.Install_floor}"></td>
+    </tr>
+    <tr>
+        <th>설치유형</th>
+        <td th:text="${wifi.Install_type}"></td>
+    </tr>
+    <tr>
+        <th>설치기관</th>
+        <td th:text="${wifi.Install_by}"></td>
+    </tr>
+    <tr>
+        <th>서비스구분</th>
+        <td th:text="${wifi.Service_type}"></td>
+    </tr>
+    <tr>
+        <th>망종류</th>
+        <td th:text="${wifi.Network_type}"></td>
+    </tr>
+    <tr>
+        <th>설치년도</th>
+        <td th:text="${wifi.Construction_year}"></td>
+    </tr>
+    <tr>
+        <th>실내외구분</th>
+        <td th:text="${wifi.In_out_door}"></td>
+    </tr>
+    <tr>
+        <th>WIFI접속환경</th>
+        <td th:text="${wifi.Remarks}"></td>
+    </tr>
+    <tr>
+        <th>X좌표</th>
+        <td th:text="${wifi.Lat}"></td>
+    </tr>
+    <tr>
+        <th>Y좌표</th>
+        <td th:text="${wifi.Lng}"></td>
+    </tr>
+    <tr>
+        <th>작업일자</th>
+        <td th:text="${wifi.Work_datetime}"></td>
+    </tr>
+
+</table>
+</body>
+</html>
